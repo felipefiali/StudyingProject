@@ -125,5 +125,48 @@ namespace StudyingProject3.Arrays
 
             return array;
         }
+
+        public static int[] CompactArray(int[] array)
+        {
+            if (array == null)
+            {
+                return null; 
+            }
+
+            if (array.Length <= 1)
+            {
+                return array;
+            }
+
+            var newArray = new int[array.Length];
+            var newArrayIndex = 0;
+
+            int lastNumber = array[0];
+            int lastNumberCount = 0;
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (lastNumber == array[i])
+                {
+                    lastNumberCount++;
+                }
+                else
+                {
+                    newArray[newArrayIndex] = lastNumberCount;
+                    newArrayIndex++;
+                    newArray[newArrayIndex] = lastNumber;
+                    newArrayIndex++;
+
+                    lastNumber = array[i];
+                    lastNumberCount = 1;
+                }
+            }
+
+            newArray[newArrayIndex] = lastNumberCount;
+            newArrayIndex++;
+            newArray[newArrayIndex] = lastNumber;
+
+            return newArray;
+        }
     }
 }

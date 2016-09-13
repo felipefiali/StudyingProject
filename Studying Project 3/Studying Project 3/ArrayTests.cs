@@ -44,7 +44,14 @@ namespace Tests
             var array = new int[] { 1, 2, 1, 1 };
 
             CollectionAssert.AreEqual(array, Arrays.LookAndSaySequence(3));
+        }
 
+        [TestMethod]
+        public void CompactArray()
+        {
+            var array = new int[] { 1, 1, 1, 1, 2, 3, 3, 3, 4, 4 };
+
+            CollectionAssert.AreEqual(new int[] { 4, 1, 1, 2, 3, 3, 2, 4, 0, 0 }, Arrays.CompactArray(array));
         }
     }
 }
