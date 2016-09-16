@@ -118,12 +118,7 @@ namespace StudyingProject3.Strings
 
             return palindromes;
         }
-
-        public static HashSet<string> GetAnagrams(string value)
-        {
-
-        }
-
+        
         private static void ExpandFromCenterAndCapturePalindrome(string value, int i, int j, HashSet<string> palindromes)
         {
             var palindrome = string.Empty;
