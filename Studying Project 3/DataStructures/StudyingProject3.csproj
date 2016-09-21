@@ -48,7 +48,9 @@
     <Compile Include="LinkedList\LinkedLists.cs" />
     <Compile Include="LinkedList\Node.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Recursion\Recursion.cs" />
     <Compile Include="Strings\Strings.cs" />
+    <Compile Include="Extensions\IntExtensions.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

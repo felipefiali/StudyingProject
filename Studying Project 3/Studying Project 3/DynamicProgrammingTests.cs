@@ -21,5 +21,21 @@ namespace Tests
             Assert.AreEqual(1, DynamicProgramming.FibonacciBottomUp(1));
             Assert.AreEqual(55, DynamicProgramming.FibonacciBottomUp(10));
         }
+
+        [TestMethod]
+        public void CutRodMemoized()
+        {
+            var prices = new int[] { 1, 5, 8, 8, 10, 17, 17, 20, 24, 30 };
+
+            Assert.AreEqual(10, DynamicProgramming.CutRodMemoized(prices, 4));
+        }
+
+        [TestMethod]
+        public void CutRodBottomUp()
+        {
+            var prices = new int[] { 1, 5, 8, 8, 10, 17, 17, 20, 24, 30 };
+
+            Assert.AreEqual(10, DynamicProgramming.CutRodBottomUp(prices, 4));
+        }
     }
 }
