@@ -15,5 +15,13 @@ namespace Tests
 
             Assert.AreEqual(10, Recursion.CutRod(prices, 4));
         }
+
+        [TestMethod]
+        public void SubsetSum()
+        {
+            var values = new int[] { 1, 5, 5, 9, 3 };
+
+            Assert.AreEqual(2, Recursion.SubsetSum(values, 12));
+        }
     }
 }
