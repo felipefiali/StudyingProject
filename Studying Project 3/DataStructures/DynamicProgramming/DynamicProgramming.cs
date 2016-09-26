@@ -75,6 +75,42 @@ namespace StudyingProject3.DynamicProgramming
             return results[n];
         }
 
+        public static bool CanSubsetSum(int[] values, int target)
+        {
+            if (values.Length == 0)
+            {
+                return false;
+            }
+            
+            var table = new bool[values.Length + 1, target + 1];
+
+            for (int i = 1; i <= target; i++)
+			{
+                table[0, i] = false;			 
+			}
+
+            for (int i = 0; i <= values.Length; i++)
+			{
+                table[i, 0] = true;			 
+			}
+
+            for (int row = 1; row <= values.Length; row++)
+            {
+                for (int col = 1; col <= target; col++)
+                {
+                    table[row, col] = table[row - 1, col];
+
+                    if (!table[row, col] && col >= values[row - 1])
+                    {
+                        table[row, col] = table[row, col] || table[row - 1, col - values[row - 1]];
+                    }
+                }
+            }
+
+            return table[values.Length, target];
+        }
+
+
         private static int CutRodMemoized(int[] prices, int n, int[] results)
         {
             if (n == 0)
@@ -110,12 +146,12 @@ namespace StudyingProject3.DynamicProgramming
             {
                 return 1;
             }
-            
+
             if (results[n] != -1)
             {
                 return results[n];
-            }   
-                    
+            }
+
             results[n] = FibonacciTopDown(n - 1, results) + FibonacciTopDown(n - 2, results);
 
             return results[n];

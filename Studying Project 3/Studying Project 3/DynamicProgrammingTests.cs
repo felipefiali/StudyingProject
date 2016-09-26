@@ -37,5 +37,14 @@ namespace Tests
 
             Assert.AreEqual(10, DynamicProgramming.CutRodBottomUp(prices, 4));
         }
+
+        [TestMethod]
+        public void IsSubsetSum()
+        {
+            var values = new int[] { 1, 3, 9, 2 };
+            var target = 5;
+
+            Assert.IsTrue(DynamicProgramming.CanSubsetSum(values, target));
+        }
     }
 }
