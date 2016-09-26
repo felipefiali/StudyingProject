@@ -46,5 +46,14 @@ namespace Tests
 
             Assert.IsTrue(DynamicProgramming.CanSubsetSum(values, target));
         }
+
+        [TestMethod]
+        public void LongestCommonSubsequence()
+        {
+            var a = "dakota";
+            var b = "aquota";
+
+            Assert.AreEqual(4, DynamicProgramming.LongestCommonSubsequence(a, b));
+        }
     }
 }

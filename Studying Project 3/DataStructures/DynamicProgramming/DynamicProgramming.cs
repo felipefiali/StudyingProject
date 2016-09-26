@@ -110,6 +110,43 @@ namespace StudyingProject3.DynamicProgramming
             return table[values.Length, target];
         }
 
+        public static int LongestCommonSubsequence(string a, string b)
+        {
+            if (string.IsNullOrEmpty(a) || string.IsNullOrEmpty(b))
+            {
+                return 0;
+            }
+
+            var table = new int[a.Length + 1, b.Length + 1];
+
+            for (int i = 0; i <= a.Length; i++)
+            {
+                table[i, 0] = 0;
+            }
+
+            for (int i = 0; i < b.Length; i++)
+            {
+                table[0, i] = 0;
+            }
+
+            for (int row = 1; row <= a.Length; row++)
+            {
+                for (int col = 1; col <= b.Length; col++)
+                {
+                    if (a[row - 1] == b[col - 1])
+                    {
+                        table[row, col] = table[row - 1, col - 1] + 1;
+                    }
+                    else
+                    {
+                        table[row, col] = IntExtensions.Max(table[row, col -1], table[row - 1, col]);
+                    }
+                }
+            }
+
+            return table[a.Length, b.Length];
+        }
+
 
         private static int CutRodMemoized(int[] prices, int n, int[] results)
         {
