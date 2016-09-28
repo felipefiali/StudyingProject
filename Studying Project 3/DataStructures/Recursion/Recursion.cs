@@ -42,6 +42,39 @@ namespace StudyingProject3.Recursion
             return indicesInSolution.Count;
         }
 
+        public static HashSet<string> GetPermutations (string word)
+        {
+            if (word.Length == 2)
+            {
+                return new HashSet<string>() { word, new string(word.ToCharArray().Reverse().ToArray())};
+            }
+
+            var newPerms = new HashSet<string>();
+
+            var firstChar = word.Substring(0, 1);
+
+            var perms = GetPermutations(word.Substring(1));
+
+            foreach (var perm in perms)
+            {
+                for (int i = 0; i <= perm.Length; i++)
+                {
+                    var newPerm = InsertCharAt(firstChar, perm, i);
+                    newPerms.Add(newPerm);
+                }
+            }
+            
+            return newPerms;
+        }
+
+        private static string InsertCharAt(string character, string perm, int index)
+        {
+            var start = perm.Substring(0, index);
+            var end = perm.Substring(index);
+
+            return start + character + end;
+        }
+
         private static void SubsetSum(int[] values, int target, int currentSum, int currentIndex, bool[] solution, HashSet<int> indicesInSolution)
         {
             if (currentSum == target)

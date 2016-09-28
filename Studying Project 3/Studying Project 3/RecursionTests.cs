@@ -2,6 +2,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Data;
 using StudyingProject3.Recursion;
+using System.Collections.Generic;
+using System.Linq;
+using System.Collections;
 
 namespace Tests
 {
@@ -22,6 +25,14 @@ namespace Tests
             var values = new int[] { 1, 5, 5, 9, 3 };
 
             Assert.AreEqual(2, Recursion.SubsetSum(values, 12));
+        }
+
+        [TestMethod]
+        public void GetPermutations()
+        {
+            var perms = new HashSet<string>() { "ABC", "ACB", "BAC", "BCA", "CAB", "CBA" };
+
+            CollectionAssert.AreEquivalent(perms.ToList(), Recursion.GetPermutations("ABC").ToList());
         }
     }
 }
