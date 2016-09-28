@@ -43,6 +43,9 @@
   <ItemGroup>
     <Compile Include="Algorithms\LRUCache.cs" />
     <Compile Include="Arrays\Arrays.cs" />
+    <Compile Include="BinaryTree\BinaryTree.cs" />
+    <Compile Include="BinaryTree\Node.cs" />
+    <Compile Include="BinaryTree\Traversal.cs" />
     <Compile Include="DynamicProgramming\DynamicProgramming.cs" />
     <Compile Include="LinkedList\LinkedList.cs" />
     <Compile Include="LinkedList\LinkedLists.cs" />

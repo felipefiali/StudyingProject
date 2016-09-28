@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BinaryTreeSamples.cs" />
     <Compile Include="LinkedListSamples.cs" />
     <Compile Include="StringSamples.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
