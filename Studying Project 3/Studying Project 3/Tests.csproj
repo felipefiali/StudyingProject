@@ -55,6 +55,7 @@
     <Compile Include="ArrayTests.cs" />
     <Compile Include="BinaryTreeTests.cs" />
     <Compile Include="DynamicProgrammingTests.cs" />
+    <Compile Include="GraphTests.cs" />
     <Compile Include="LinkedListTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecursionTests.cs" />

@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinaryTreeSamples.cs" />
+    <Compile Include="GraphSamples.cs" />
     <Compile Include="LinkedListSamples.cs" />
     <Compile Include="StringSamples.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
