@@ -31,6 +31,7 @@ namespace Data
         {
             var root = new Node()
             {
+                Value = 300,
                 Left = new Node()
                 {
                     Value = 80,

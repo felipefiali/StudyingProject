@@ -69,5 +69,17 @@ namespace Tests
             Assert.IsTrue(BinaryTree.IsBinarySearchTree(BinaryTreeSamples.BalancedBST()));
             Assert.IsFalse(BinaryTree.IsBinarySearchTree(BinaryTreeSamples.BalancedTree()));
         }
+
+        [TestMethod]
+        public void FindInOrderSucessor()
+        {
+            Assert.AreEqual(35, BinaryTree.GetInOrderSucessor(BinaryTreeSamples.BalancedBST(), 30).Value);
+        }
+
+        [TestMethod]
+        public void FindCommonAncestorRecursive()
+        {
+            Assert.AreEqual(40, BinaryTree.FindFirstCommonAncestor(BinaryTreeSamples.BalancedTree(), 70, 55).Value);
+        }
     }
 }

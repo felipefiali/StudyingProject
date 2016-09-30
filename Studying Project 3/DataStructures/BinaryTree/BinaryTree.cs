@@ -144,6 +144,70 @@ namespace StudyingProject3.BinaryTree
             return IsBinarySearchTree(root, -1, 9999);
         }
 
+        public static Node GetInOrderSucessor(Node root, int nodeValue)
+        {
+            if (root == null)
+            {
+                return null;
+            }
+
+            Node result = null;
+
+            var current = root;
+
+            while (current != null)
+            {
+                if (current.Value > nodeValue)
+                {
+                    result = current;
+                    current = current.Left;
+                }
+                else
+                {
+                    current = current.Right;
+                }
+            }
+
+            return result;
+        }
+
+        public static Node FindFirstCommonAncestor(Node root, int node1, int node2)
+        {
+            Node result = null;
+
+            if (root.Left != null)
+            {
+                result = FindFirstCommonAncestor(root.Left, node1, node2);
+            }
+
+            if (result == null && root.Right != null)
+            {
+                result = FindFirstCommonAncestor(root.Right, node1, node2);
+            }
+
+            if (result == null && IsNodeInTree(root, node1) && IsNodeInTree(root, node2))
+            {
+                result = root;
+            }
+
+            return result;
+        }
+
+        private static bool IsNodeInTree(Node root, int node)
+        {
+            if (root == null)
+            {
+                return false;
+            }
+
+            if (root.Value == node)
+            {
+                return true;
+            }
+
+            return IsNodeInTree(root.Left, node) || IsNodeInTree(root.Right, node);
+        }
+
         private static bool IsBinarySearchTree(Node root, int min, int max)
         {
             if (root == null)
