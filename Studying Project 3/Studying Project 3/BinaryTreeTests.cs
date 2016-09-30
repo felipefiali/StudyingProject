@@ -81,5 +81,12 @@ namespace Tests
         {
             Assert.AreEqual(40, BinaryTree.FindFirstCommonAncestor(BinaryTreeSamples.BalancedTree(), 70, 55).Value);
         }
+
+        [TestMethod]
+        public void IsSubTree()
+        {
+            Assert.IsTrue(BinaryTree.IsSubTreeOfTree(BinaryTreeSamples.BalancedTree(), BinaryTreeSamples.SubTreeOfBalancedTree()));
+            Assert.IsFalse(BinaryTree.IsSubTreeOfTree(BinaryTreeSamples.BalancedTree(), BinaryTreeSamples.UnbalancedTree()));
+        }
     }
 }

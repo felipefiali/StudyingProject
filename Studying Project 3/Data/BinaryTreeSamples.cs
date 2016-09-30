@@ -77,6 +77,23 @@ namespace Data
             return root;
         }
 
+        public static Node SubTreeOfBalancedTree()
+        {
+            var root = new Node()
+            {
+                Value = 15,
+                Left = new Node()
+                {
+                    Value = 101
+                },
+                Right = new Node()
+                {
+                    Value = 100
+                }
+            };
+
+            return root;
+        }
 
         public static Node BalancedBST()
         {

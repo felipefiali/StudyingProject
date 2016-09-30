@@ -193,6 +193,61 @@ namespace StudyingProject3.BinaryTree
             return result;
         }
 
+        public static bool IsSubTreeOfTree(Node parent, Node subTree)
+        {
+            if (subTree == null)
+            {
+                return true;
+            }
+
+            return IsSubTree(parent, subTree);
+        }
+
+        private static bool IsSubTree(Node parent, Node subTree)
+        {
+            if (parent == null)
+            {
+                return false;
+            }
+
+            if (parent.Value == subTree.Value)
+            {
+                if (MatchTree(parent, subTree))
+                {
+                    return true;
+                }
+            }
+
+            return IsSubTree(parent.Left, subTree) || IsSubTree(parent.Right, subTree);
+        }
+
+        private static bool MatchTree(Node parent, Node subTree)
+        {
+            if (parent == null && subTree == null)
+            {
+                return true;
+            }
+
+            if (parent == null)
+            {
+                return false;
+            }
+
+            if (subTree == null)
+            {
+                return true;
+            }
+
+            if (parent.Value == subTree.Value)
+            {
+                return MatchTree(parent.Left, subTree.Left) && MatchTree(parent.Right, subTree.Right);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         private static bool IsNodeInTree(Node root, int node)
         {
             if (root == null)
