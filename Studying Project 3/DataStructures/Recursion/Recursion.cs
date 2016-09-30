@@ -67,6 +67,49 @@ namespace StudyingProject3.Recursion
             return newPerms;
         }
 
+        public static Dictionary<string, string> FlattenDictionaries(Dictionary<string, object> unflattenedDictionary)
+        {
+            var result = new Dictionary<string, string>();
+
+            if (unflattenedDictionary == null)
+            {
+                return result;
+            }
+
+            FlattenDictionaries(unflattenedDictionary, result, string.Empty);
+
+            return result;
+        }
+
+        private static void FlattenDictionaries(Dictionary<string, object> unflattenedDictionary, Dictionary<string, string> result, string prefix)
+        {
+            foreach (var dictObject in unflattenedDictionary)
+            {
+                if (dictObject.Value is Dictionary<string, object>)
+                {
+                    if (string.IsNullOrEmpty(prefix))
+                    {
+                        FlattenDictionaries((Dictionary<string, object>)dictObject.Value, result, dictObject.Key.ToString());
+                    }
+                    else
+                    {
+                        FlattenDictionaries((Dictionary<string, object>)dictObject.Value, result, prefix + "." + dictObject.Key.ToString());
+                    }                    
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(prefix))
+                    {
+                        result.Add(dictObject.Key, dictObject.Value.ToString());
+                    }
+                    else
+                    {
+                        result.Add(prefix + "." + dictObject.Key, dictObject.Value.ToString());
+                    }
+                }
+            }
+        }
+
         private static string InsertCharAt(string character, string perm, int index)
         {
             var start = perm.Substring(0, index);

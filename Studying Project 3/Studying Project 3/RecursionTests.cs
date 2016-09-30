@@ -34,5 +34,37 @@ namespace Tests
 
             CollectionAssert.AreEquivalent(perms.ToList(), Recursion.GetPermutations("ABC").ToList());
         }
+
+        [TestMethod]
+        public void FlattenDictionaries()
+        {
+            var nestedDictionaries = new Dictionary<string, object>
+            {
+                { "Key1", "Value1" },
+                { "Key2", "Value2" },
+                { "Key3", new Dictionary<string, object> 
+                {
+                    { "a", "1" },
+                    { "b", new Dictionary<string, object> 
+                    {
+                        { "c1", "c1" },
+                        { "c2", "c2" },
+                        { "c3", "c3" }
+                    }},
+                }},
+            };
+
+            var expected = new Dictionary<string, string>
+            {
+                { "Key1", "Value1" },
+                { "Key2", "Value2" },
+                { "Key3.a", "1" },
+                { "Key3.b.c1", "c1" },
+                { "Key3.b.c2", "c2" },
+                { "Key3.b.c3", "c3" },
+            };
+
+            CollectionAssert.AreEqual(expected, Recursion.FlattenDictionaries(nestedDictionaries));
+        }
     }
 }

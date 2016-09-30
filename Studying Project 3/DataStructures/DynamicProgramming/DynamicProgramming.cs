@@ -147,7 +147,6 @@ namespace StudyingProject3.DynamicProgramming
             return table[a.Length, b.Length];
         }
 
-
         private static int CutRodMemoized(int[] prices, int n, int[] results)
         {
             if (n == 0)
