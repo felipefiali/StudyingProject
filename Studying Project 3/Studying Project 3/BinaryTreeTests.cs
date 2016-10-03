@@ -88,5 +88,23 @@ namespace Tests
             Assert.IsTrue(BinaryTree.IsSubTreeOfTree(BinaryTreeSamples.BalancedTree(), BinaryTreeSamples.SubTreeOfBalancedTree()));
             Assert.IsFalse(BinaryTree.IsSubTreeOfTree(BinaryTreeSamples.BalancedTree(), BinaryTreeSamples.UnbalancedTree()));
         }
+
+        [TestMethod]
+        public void GetPathsThatSumToValue()
+        {
+            var expected = new List<List<int>>
+            {
+                new List<int> { 25, 20 },
+                new List<int> { 25, 30, -10 },
+                new List<int> { 30, 15 }
+            };
+
+            var actual = BinaryTree.GetPathsThatSumToGivenValue(BinaryTreeSamples.BalancedWithNegativeNumbers(), 45);
+
+            for (int i = 0; i < expected.Count; i++)
+            {
+                CollectionAssert.AreEqual(expected[i], actual[i]);
+            }
+        }
     }
 }

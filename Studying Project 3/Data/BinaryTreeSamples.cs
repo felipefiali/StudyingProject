@@ -128,5 +128,39 @@ namespace Data
 
             return root;
         }
+
+        public static Node BalancedWithNegativeNumbers()
+        {
+            var root = new Node()
+            {
+                Value = 25,
+                Left = new Node()
+                {
+                    Value = 20,
+                    Left = new Node()
+                    {
+                        Value = 15
+                    },
+                    Right = new Node()
+                    {
+                        Value = -22
+                    }
+                },
+                Right = new Node()
+                {
+                    Value = 30,
+                    Left = new Node()
+                    {
+                        Value = -10
+                    },
+                    Right = new Node()
+                    {
+                        Value = 15
+                    }
+                }
+            };
+
+            return root;
+        }
     }
 }

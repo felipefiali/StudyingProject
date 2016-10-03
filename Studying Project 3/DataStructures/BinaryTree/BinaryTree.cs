@@ -84,7 +84,7 @@ namespace StudyingProject3.BinaryTree
                 return null;
             }
 
-            return  GetBinaryTreeFromArray(array, 0, array.Length - 1);
+            return GetBinaryTreeFromArray(array, 0, array.Length - 1);
         }
 
         public static List<List<Node>> GetListForEachDepth(Node root)
@@ -140,7 +140,7 @@ namespace StudyingProject3.BinaryTree
             {
                 return false;
             }
-            
+
             return IsBinarySearchTree(root, -1, 9999);
         }
 
@@ -203,6 +203,38 @@ namespace StudyingProject3.BinaryTree
             return IsSubTree(parent, subTree);
         }
 
+        public static List<List<int>> GetPathsThatSumToGivenValue(Node root, int value)
+        {
+            return GetPathsThatSumToGivenValue(root, value, 0, new List<int>(), new List<List<int>>());
+        }
+
+        private static List<List<int>> GetPathsThatSumToGivenValue(Node root, int value, int currentSum, List<int> currentPath, List<List<int>> result)
+        {
+            if (root == null)
+            {
+                return result;
+            }
+
+            currentSum += root.Value;
+
+            currentPath.Add(root.Value);
+
+            if (currentSum == value)
+            {
+                result.Add(currentPath);
+            }
+            else
+            {
+                GetPathsThatSumToGivenValue(root.Left, value, currentSum, new List<int>(currentPath), result);
+                GetPathsThatSumToGivenValue(root.Right, value, currentSum, new List<int>(currentPath), result);
+            }
+
+            GetPathsThatSumToGivenValue(root.Left, value, 0, new List<int>(), result);
+            GetPathsThatSumToGivenValue(root.Right, value, 0, new List<int>(), result);
+
+            return result;
+        }
+        
         private static bool IsSubTree(Node parent, Node subTree)
         {
             if (parent == null)
@@ -276,7 +308,7 @@ namespace StudyingProject3.BinaryTree
             }
 
             return IsBinarySearchTree(root.Left, min, root.Value) && IsBinarySearchTree(root.Right, root.Value, max);
-            
+
         }
 
         private static Node GetBinaryTreeFromArray(int[] array, int start, int end)
@@ -330,7 +362,7 @@ namespace StudyingProject3.BinaryTree
                 return -1;
             }
 
-            return Math.Max(rightTreeHeight, leftTreeHeight) + 1; 
+            return Math.Max(rightTreeHeight, leftTreeHeight) + 1;
         }
     }
 }

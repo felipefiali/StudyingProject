@@ -48,9 +48,12 @@ namespace StudyingProject3.Strings
 
                 mutableString[i] = value[j];
                 mutableString[j] = value[i];
+
+                i++;
+                j--;
             }
 
-            return mutableString.ToString();
+            return new string(mutableString);
         }
 
         public static string WordsToNumbersNewString(string value)
