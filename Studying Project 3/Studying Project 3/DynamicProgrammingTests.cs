@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StudyingProject3.DynamicProgramming;
+using System;
+using System.Collections.Generic;
 
 namespace Tests
 {
@@ -54,6 +56,38 @@ namespace Tests
             var b = "aquota";
 
             Assert.AreEqual(4, DynamicProgramming.LongestCommonSubsequence(a, b));
+        }
+
+        [TestMethod]
+        public void Knapsack()
+        {
+            var values = new int[] { 5, 10, 2, 8, 1 };
+            var weights = new int[] { 3, 6, 2, 4, 1 };
+            var max = 7;
+
+            Assert.AreEqual(13, DynamicProgramming.Knapsack(values, weights, max));
+        }
+
+        [TestMethod]
+        public void GetKnapsackItems()
+        {
+            var values = new int[] { 5, 10, 2, 8, 1 };
+            var weights = new int[] { 3, 6, 2, 4, 1 };
+            var max = 7;
+
+            var expected = new List<Tuple<int, int>>
+            {
+                new Tuple<int, int>(8, 4),
+                new Tuple<int, int>(5, 3)
+            };
+
+            var actual = DynamicProgramming.GetKnapSackItems(values, weights, max);
+
+            for (int i = 0; i < expected.Count; i++)
+            {
+                Assert.AreEqual(expected[0].Item1, actual[0].Item1);
+                Assert.AreEqual(expected[0].Item2, actual[0].Item2);
+            }
         }
     }
 }

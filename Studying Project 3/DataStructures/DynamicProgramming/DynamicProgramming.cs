@@ -1,5 +1,7 @@
 ﻿using StudyingProject3.Extensions;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace StudyingProject3.DynamicProgramming
 {
@@ -81,18 +83,18 @@ namespace StudyingProject3.DynamicProgramming
             {
                 return false;
             }
-            
+
             var table = new bool[values.Length + 1, target + 1];
 
             for (int i = 1; i <= target; i++)
-			{
-                table[0, i] = false;			 
-			}
+            {
+                table[0, i] = false;
+            }
 
             for (int i = 0; i <= values.Length; i++)
-			{
-                table[i, 0] = true;			 
-			}
+            {
+                table[i, 0] = true;
+            }
 
             for (int row = 1; row <= values.Length; row++)
             {
@@ -139,12 +141,90 @@ namespace StudyingProject3.DynamicProgramming
                     }
                     else
                     {
-                        table[row, col] = IntExtensions.Max(table[row, col -1], table[row - 1, col]);
+                        table[row, col] = IntExtensions.Max(table[row, col - 1], table[row - 1, col]);
                     }
                 }
             }
 
             return table[a.Length, b.Length];
+        }
+
+        public static int Knapsack(int[] values, int[] weights, int max)
+        {
+            if (values.Length != weights.Length)
+            {
+                return 0;
+            }
+
+            var table = ConstructKnapsackTable(values, weights, max);
+
+            return table[values.Length, max];
+        }
+
+
+        public static List<Tuple<int, int>> GetKnapSackItems(int[] values, int[] weights, int max)
+        {
+            if (values.Length != weights.Length)
+            {
+                return new List<Tuple<int, int>>();
+            }
+
+            var itemsUsed = new List<Tuple<int, int>>();
+
+            var table = ConstructKnapsackTable(values, weights, max);
+
+            int row = values.Length;
+
+            int col = max;
+
+            while (table[row, col] != 0)
+            {
+                if (table[row, col] == table[row - 1, col])
+                {
+                    row--;
+                }
+                else
+                {
+                    itemsUsed.Add(new Tuple<int, int>(values[row - 1], weights[row - 1]));
+
+                    col = col - weights[row - 1];
+                    row--;
+                }
+            }
+
+            return itemsUsed;
+        }
+
+        private static int[,] ConstructKnapsackTable(int[] values, int[] weights, int max)
+        {
+            var table = new int[values.Length + 1, max + 1];
+
+            for (int i = 0; i <= values.Length; i++)
+            {
+                table[i, 0] = 0;
+            }
+
+            for (int i = 0; i <= max; i++)
+            {
+                table[0, i] = 0;
+            }
+
+            for (int row = 1; row <= values.Length; row++)
+            {
+                for (int col = 1; col <= max; col++)
+                {
+                    if (weights[row - 1] > col)
+                    {
+                        table[row, col] = table[row - 1, col];
+                    }
+                    else
+                    {
+                        table[row, col] = Math.Max(values[row - 1] + table[row - 1, col - weights[row - 1]], table[row - 1, col]);
+                    }
+                }
+            }
+
+            return table;
         }
 
         private static int CutRodMemoized(int[] prices, int n, int[] results)
