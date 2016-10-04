@@ -84,6 +84,42 @@ namespace StudyingProject3.DynamicProgramming
                 return false;
             }
 
+            var table = ConstructSubsetSumTable(values, target);
+
+            return table[values.Length, target];
+        }
+
+        public static List<int> GetSubsetSum(int[] values, int target)
+        {
+            var table = ConstructSubsetSumTable(values, target);
+
+            var row = values.Length;
+            var col = target;
+
+            var numbersUsed = new List<int>();
+
+            if (!table[row, col])
+            {
+                return numbersUsed;
+            }
+
+            while (row > 0)
+            {
+                if (table[row, col] != table[row - 1, col])
+                {
+                    numbersUsed.Add(values[row - 1]);
+
+                    col = col - values[row - 1];
+                }
+
+                row--;
+            }
+
+            return numbersUsed;
+        }
+
+        private static bool[,] ConstructSubsetSumTable(int[] values, int target)
+        {
             var table = new bool[values.Length + 1, target + 1];
 
             for (int i = 1; i <= target; i++)
@@ -109,7 +145,7 @@ namespace StudyingProject3.DynamicProgramming
                 }
             }
 
-            return table[values.Length, target];
+            return table;
         }
 
         public static int LongestCommonSubsequence(string a, string b)
@@ -160,7 +196,6 @@ namespace StudyingProject3.DynamicProgramming
 
             return table[values.Length, max];
         }
-
 
         public static List<Tuple<int, int>> GetKnapSackItems(int[] values, int[] weights, int max)
         {

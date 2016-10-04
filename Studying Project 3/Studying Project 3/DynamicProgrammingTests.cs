@@ -50,6 +50,17 @@ namespace Tests
         }
 
         [TestMethod]
+        public void GetSubsetSum()
+        {
+            var values = new int[] { 1, 3, 9, 2 };
+            var target = 5;
+
+            var expected = new int[] { 2, 3 };
+
+            CollectionAssert.AreEqual(expected, DynamicProgramming.GetSubsetSum(values, target));
+        }
+
+        [TestMethod]
         public void LongestCommonSubsequence()
         {
             var a = "dakota";
