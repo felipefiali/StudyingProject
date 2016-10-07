@@ -81,6 +81,20 @@ namespace StudyingProject3.Recursion
             return result;
         }
 
+        public static int GetWaysToReachNum(int value)
+        {
+            if (value == 0)
+            {
+                return 1;
+            }
+            else if (value < 0)
+            {
+                return 0;
+            }
+
+            return GetWaysToReachNum(value - 1) + GetWaysToReachNum(value - 2) + GetWaysToReachNum(value - 3);
+        }
+
         private static void FlattenDictionaries(Dictionary<string, object> unflattenedDictionary, Dictionary<string, string> result, string prefix)
         {
             foreach (var dictObject in unflattenedDictionary)

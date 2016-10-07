@@ -230,6 +230,42 @@ namespace StudyingProject3.DynamicProgramming
             return itemsUsed;
         }
 
+        public static int GetWaysToReachNum(int value)
+        {
+            var map = new int[value + 1];
+
+            for (int i = 0; i <= value; i++)
+            {
+                map[i] = -1;                
+            }
+
+            return GetWaysToReachSumMemoized(value, map);
+        }
+
+        private static int GetWaysToReachSumMemoized(int value, int[] map)
+        {
+            if (value == 0)
+            {
+                return 1;
+            }
+
+            if (value < 0)
+            {
+                return 0;
+            }
+
+            if (map[value] > -1)
+            {
+                return map[value];
+            }
+
+            map[value] = GetWaysToReachSumMemoized(value - 1, map) +
+                         GetWaysToReachSumMemoized(value - 2, map) +
+                         GetWaysToReachSumMemoized(value - 3, map);
+
+            return map[value];
+        }
+
         private static int[,] ConstructKnapsackTable(int[] values, int[] weights, int max)
         {
             var table = new int[values.Length + 1, max + 1];

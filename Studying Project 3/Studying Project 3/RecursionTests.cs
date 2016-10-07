@@ -66,5 +66,11 @@ namespace Tests
 
             CollectionAssert.AreEqual(expected, Recursion.FlattenDictionaries(nestedDictionaries));
         }
+
+        [TestMethod]
+        public void GetWaysToReachNum()
+        {
+            Assert.AreEqual(4, Recursion.GetWaysToReachNum(3));
+        }
     }
 }

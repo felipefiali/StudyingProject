@@ -100,5 +100,11 @@ namespace Tests
                 Assert.AreEqual(expected[0].Item2, actual[0].Item2);
             }
         }
+
+        [TestMethod]
+        public void GetWaysToReachNumMemoized()
+        {
+            Assert.AreEqual(4, DynamicProgramming.GetWaysToReachNum(3));
+        }
     }
 }
