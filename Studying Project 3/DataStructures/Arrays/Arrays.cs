@@ -168,5 +168,39 @@ namespace StudyingProject3.Arrays
 
             return newArray;
         }
+
+        public static void MakeRowAndColumnZero(int[,] matrix, int size)
+        {
+            var listOfRowAndColumns = new List<Tuple<int, int>>();
+
+            for (int row = 0; row < size; row++)
+            {
+                for (int col = 0; col < size; col++)
+                {
+                    if (matrix[row, col] == 0)
+                    {
+                        listOfRowAndColumns.Add(new Tuple<int, int>(row, col));
+                    }
+                }
+            }
+
+            foreach (var item in listOfRowAndColumns)
+            {
+                MakeRowAndColumnZero(matrix, item.Item1, item.Item2, size);                
+            }
+        }
+
+        private static void MakeRowAndColumnZero(int[,] matrix, int row, int col, int size)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                matrix[row, i] = 0;
+            }
+
+            for (int i = 0; i < size; i++)
+            {
+                matrix[i, col] = 0;
+            }
+        }        
     }
 }

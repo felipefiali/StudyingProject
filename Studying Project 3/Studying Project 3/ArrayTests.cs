@@ -53,5 +53,29 @@ namespace Tests
 
             CollectionAssert.AreEqual(new int[] { 4, 1, 1, 2, 3, 3, 2, 4, 0, 0 }, Arrays.CompactArray(array));
         }
+
+        [TestMethod]
+        public void MakeRowAndColZero()
+        {
+            var matrix = new int[,]
+            {
+                { 1, 1, 1, 1 },
+                { 1, 1, 1, 1 },
+                { 1, 1, 0, 1 },
+                { 0, 1, 1, 1 }
+            };
+
+            var expected = new int[,]
+            {
+                { 0, 1, 0, 1 },
+                { 0, 1, 0, 1 },
+                { 0, 0, 0, 0 },
+                { 0, 0, 0, 0 }
+            };
+
+            Arrays.MakeRowAndColumnZero(matrix, 4);
+
+            CollectionAssert.AreEqual(expected, matrix);
+        }
     }
 }
