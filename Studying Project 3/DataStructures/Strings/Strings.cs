@@ -121,6 +121,89 @@ namespace StudyingProject3.Strings
 
             return palindromes;
         }
+
+        public static string SmallestSubstringOfStringWithCharacters(char[] characters, string bigString)
+        {
+            if (characters.Length == 1)
+            {
+                return new string(characters);
+            }
+
+            int uniqueCharsCount = 0;
+
+            var charactersDict = new Dictionary<char, int>();
+
+            foreach (var character in characters)
+            {
+                if (!charactersDict.ContainsKey(character))
+                {
+                    uniqueCharsCount++;
+
+                    charactersDict.Add(character, 1);
+                }
+                else
+                {
+                    charactersDict[character] += 1;
+                }
+            }
+
+            var minHead = 0;
+            var minTail = 0;
+            var minLength = Int32.MaxValue;
+
+            for (int head = 0; head < bigString.Length; head++)
+            {
+                var foundCharsDict = new Dictionary<char, int>();
+                var currentUniqueCharsCount = 0;
+
+                if (charactersDict.ContainsKey(bigString[head]))
+                {
+                    foundCharsDict.Add(bigString[head], 1);
+
+                    if (foundCharsDict[bigString[head]] == charactersDict[bigString[head]])
+                    {
+                        currentUniqueCharsCount++;
+                    }
+
+                    for (int tail = head + 1; tail < bigString.Length; tail++)
+                    {
+                        if (charactersDict.ContainsKey(bigString[tail]))
+                        {
+                            if (foundCharsDict.ContainsKey(bigString[tail]))
+                            {
+                                foundCharsDict[bigString[tail]] += 1;
+                            }
+                            else
+                            {
+                                foundCharsDict.Add(bigString[tail], 1);
+                            }
+
+                            if (foundCharsDict[bigString[tail]] == charactersDict[bigString[tail]])
+                            {
+                                currentUniqueCharsCount++;
+                            }
+                        }                        
+
+                        if (currentUniqueCharsCount == uniqueCharsCount)
+                        {
+                            var size = (tail - head) + 1;
+
+                            if (size < minLength)
+                            {
+                                minLength = size;
+                                minHead = head;
+                                minTail = tail;
+                            }
+
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return bigString.Substring(minHead, minLength);
+
+        }
         
         private static void ExpandFromCenterAndCapturePalindrome(string value, int i, int j, HashSet<string> palindromes)
         {

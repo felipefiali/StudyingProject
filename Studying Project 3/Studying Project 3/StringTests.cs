@@ -78,5 +78,15 @@ namespace Tests
 
             CollectionAssert.AreEqual(new List<string>(), Strings.GetPalindromesFromString(value).ToList());
         }
+
+        [TestMethod]
+        public void GetSmallestSubstringWithCharacters()
+        {
+            var characters = new char[] { 'x', 'y', 'z' };
+
+            var bigString = "abxaaykkzbbyzx";
+
+            Assert.AreEqual("yzx", Strings.SmallestSubstringOfStringWithCharacters(characters, bigString));
+        }
     }
 }

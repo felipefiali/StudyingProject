@@ -189,7 +189,7 @@ namespace StudyingProject3.Arrays
                 MakeRowAndColumnZero(matrix, item.Item1, item.Item2, size);                
             }
         }
-
+               
         private static void MakeRowAndColumnZero(int[,] matrix, int row, int col, int size)
         {
             for (int i = 0; i < size; i++)
