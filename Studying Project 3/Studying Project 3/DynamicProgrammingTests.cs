@@ -61,12 +61,23 @@ namespace Tests
         }
 
         [TestMethod]
+        public void LongestCommonSubsequenceCount()
+        {
+            var a = "dakota";
+            var b = "aquota";
+
+            Assert.AreEqual(4, DynamicProgramming.GetLongestCommonSubsequenceSize(a, b));
+        }
+
+        [TestMethod]
         public void LongestCommonSubsequence()
         {
             var a = "dakota";
             var b = "aquota";
 
-            Assert.AreEqual(4, DynamicProgramming.LongestCommonSubsequence(a, b));
+            var expected = new char[] { 'a', 'o', 't', 'a' };
+
+            CollectionAssert.AreEqual(expected, DynamicProgramming.GetLongestCommonSubsequence(a, b));
         }
 
         [TestMethod]

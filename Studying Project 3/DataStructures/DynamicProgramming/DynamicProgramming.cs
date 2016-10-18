@@ -117,44 +117,56 @@ namespace StudyingProject3.DynamicProgramming
 
             return numbersUsed;
         }
-
-        private static bool[,] ConstructSubsetSumTable(int[] values, int target)
-        {
-            var table = new bool[values.Length + 1, target + 1];
-
-            for (int i = 1; i <= target; i++)
-            {
-                table[0, i] = false;
-            }
-
-            for (int i = 0; i <= values.Length; i++)
-            {
-                table[i, 0] = true;
-            }
-
-            for (int row = 1; row <= values.Length; row++)
-            {
-                for (int col = 1; col <= target; col++)
-                {
-                    table[row, col] = table[row - 1, col];
-
-                    if (!table[row, col] && col >= values[row - 1])
-                    {
-                        table[row, col] = table[row, col] || table[row - 1, col - values[row - 1]];
-                    }
-                }
-            }
-
-            return table;
-        }
-
-        public static int LongestCommonSubsequence(string a, string b)
+        
+        public static int GetLongestCommonSubsequenceSize(string a, string b)
         {
             if (string.IsNullOrEmpty(a) || string.IsNullOrEmpty(b))
             {
                 return 0;
             }
 
+            return ConstructLongestCommonSubsequenceTable(a, b)[a.Length, b.Length];
+        }
+
+        public static char[] GetLongestCommonSubsequence(string a, string b)
+        {
+            if (string.IsNullOrEmpty(a) || string.IsNullOrEmpty(b))
+            {
+                return string.Empty.ToCharArray();
+            }
+
+            var charList = new List<char>();
+
+            var table = ConstructLongestCommonSubsequenceTable(a, b);
+
+            int row = a.Length, col = b.Length;
+
+            while (row > 0 && col > 0)
+            {
+                if (table[row, col] != table[row - 1, col] && table[row, col] != table[row, col - 1])
+                {
+                    charList.Add(a[row - 1]);
+
+                    row--;
+                    col--;
+                }
+                else if (table[row, col] == table[row - 1, col])
+                {
+                    row--;
+                }
+                else
+                {
+                    col--;
+                }
+            }
+
+            charList.Reverse();
+
+            return charList.ToArray();
+        }
+
+        private static int[,] ConstructLongestCommonSubsequenceTable(string a, string b)
+        {
             var table = new int[a.Length + 1, b.Length + 1];
 
             for (int i = 0; i <= a.Length; i++)
@@ -182,7 +194,7 @@ namespace StudyingProject3.DynamicProgramming
                 }
             }
 
-            return table[a.Length, b.Length];
+            return table;
         }
 
         public static int Knapsack(int[] values, int[] weights, int max)
@@ -240,6 +252,36 @@ namespace StudyingProject3.DynamicProgramming
             }
 
             return GetWaysToReachSumMemoized(value, map);
+        }
+
+        private static bool[,] ConstructSubsetSumTable(int[] values, int target)
+        {
+            var table = new bool[values.Length + 1, target + 1];
+
+            for (int i = 1; i <= target; i++)
+            {
+                table[0, i] = false;
+            }
+
+            for (int i = 0; i <= values.Length; i++)
+            {
+                table[i, 0] = true;
+            }
+
+            for (int row = 1; row <= values.Length; row++)
+            {
+                for (int col = 1; col <= target; col++)
+                {
+                    table[row, col] = table[row - 1, col];
+
+                    if (!table[row, col] && col >= values[row - 1])
+                    {
+                        table[row, col] = table[row, col] || table[row - 1, col - values[row - 1]];
+                    }
+                }
+            }
+
+            return table;
         }
 
         private static int GetWaysToReachSumMemoized(int value, int[] map)

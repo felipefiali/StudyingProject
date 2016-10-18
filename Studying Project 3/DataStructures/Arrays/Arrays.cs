@@ -189,6 +189,39 @@ namespace StudyingProject3.Arrays
                 MakeRowAndColumnZero(matrix, item.Item1, item.Item2, size);                
             }
         }
+
+        public static List<int> GetNumbersInBothOrderedArrays(int[] array1, int[] array2)
+        {
+            var numbersInBoth = new List<int>();
+
+            if (array1.Length == 0 || array2.Length == 0)
+            {
+                return numbersInBoth;
+            }
+
+            int array1Index = 0, array2Index = 0;
+
+            while (array1Index != array1.Length && array2Index != array2.Length)
+            {
+                if (array1[array1Index] == array2[array2Index])
+                {
+                    numbersInBoth.Add(array1[array1Index]);
+
+                    array1Index++;
+                    array2Index++;
+                }
+                else if (array1[array1Index] > array2[array2Index])
+                {
+                    array2Index++;
+                }
+                else
+                {
+                    array1Index++;
+                }                
+            }
+
+            return numbersInBoth;
+        }
                
         private static void MakeRowAndColumnZero(int[,] matrix, int row, int col, int size)
         {

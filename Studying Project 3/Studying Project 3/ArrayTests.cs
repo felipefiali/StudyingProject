@@ -77,5 +77,16 @@ namespace Tests
 
             CollectionAssert.AreEqual(expected, matrix);
         }
+
+        [TestMethod]
+        public void GetNumbersInBothArrays()
+        {
+            var array1 = new int[] { 1, 2, 4, 6, 9, 19, 22 };
+            var array2 = new int[] { 4, 6, 10, 19, 22, 25, 33 };
+
+            var expected = new int[] { 4, 6, 19, 22 };
+
+            CollectionAssert.AreEqual(expected, Arrays.GetNumbersInBothOrderedArrays(array1, array2));
+        }
     }
 }
