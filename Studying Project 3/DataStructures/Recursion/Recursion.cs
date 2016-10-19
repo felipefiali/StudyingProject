@@ -95,6 +95,88 @@ namespace StudyingProject3.Recursion
             return GetWaysToReachNum(value - 1) + GetWaysToReachNum(value - 2) + GetWaysToReachNum(value - 3);
         }
 
+        public static int GetMagicIndex(int[] array)
+        {
+            if (array.Length == 0)
+            {
+                return 0;
+            }
+
+            return GetMagicIndex(array, 0, array.Length - 1);
+        }
+
+        public static List<List<int>> GetAllSubsetsOfSet(int[] array)
+        {
+            if (array.Length == 0)
+            {
+                return null;
+            }
+
+            var subsets = new List<List<int>>();
+
+            return GetAllSubsetsOfSet(array, 0, subsets);
+        }
+
+        private static List<List<int>> GetAllSubsetsOfSet(int[] array, int curIndex, List<List<int>> subsets)
+        {
+            if (curIndex == array.Length)
+            {
+                subsets.Add(new List<int>());
+
+                return subsets;
+            }
+
+            var item = array[curIndex];
+
+            GetAllSubsetsOfSet(array, curIndex + 1, subsets);
+
+            var newSets = new List<List<int>>();
+
+            foreach (var set in subsets)
+            {
+                var newSet = new List<int>();
+
+                newSet.Add(item);
+                newSet.AddRange(set);
+
+                newSets.Add(newSet);
+            }
+
+            subsets.AddRange(newSets);
+            
+            return subsets;
+        }
+
+        private static int GetMagicIndex(int[] array, int start, int end)
+        {
+            if (end < start || start > array.Length - 1 || end > array.Length - 1 || start < 0 || end < 0)
+            {
+                return -1;
+            }
+
+            var middle = (start + end) / 2;
+
+            if (array[middle] == middle)
+            {
+                return middle;
+            }
+
+            var leftEnd = Math.Min(middle - 1, array[middle]);           
+
+            var left = GetMagicIndex(array, start, leftEnd);
+
+            if (left > 0)
+            {
+                return left;
+            }
+
+            var rightStart = Math.Max(middle + 1, array[middle]);
+
+            var right = GetMagicIndex(array, rightStart, end);
+
+            return right;
+        }
+
         private static void FlattenDictionaries(Dictionary<string, object> unflattenedDictionary, Dictionary<string, string> result, string prefix)
         {
             foreach (var dictObject in unflattenedDictionary)

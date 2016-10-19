@@ -72,5 +72,34 @@ namespace Tests
         {
             Assert.AreEqual(4, Recursion.GetWaysToReachNum(3));
         }
+
+        [TestMethod]
+        public void GetMagicIndex()
+        {
+            var array = new int[] { -10, -5, 2, 2, 2, 3, 4, 7, 9, 12, 13 };
+
+            Assert.AreEqual(2, Recursion.GetMagicIndex(array));
+        }
+
+        [TestMethod]
+        public void GetAllSubsetsOfSet()
+        {
+            var array = new int[] { 1, 2 };
+
+            var expected = new List<List<int>>()
+            {
+                new List<int> {  },
+                new List<int> { 2 },
+                new List<int> { 1 },
+                new List<int> { 1, 2 }                
+            };
+
+            var actual = Recursion.GetAllSubsetsOfSet(array);
+
+            for (int i = 0; i < expected.Count; i++)
+            {
+                CollectionAssert.AreEqual(expected[i], actual[i]);
+            }
+        }
     }
 }
