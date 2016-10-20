@@ -222,6 +222,37 @@ namespace StudyingProject3.Arrays
 
             return numbersInBoth;
         }
+
+        public static int[,] RotateMatrix(int[,] matrix, int size, int degrees)
+        {
+            if (degrees % 90 != 0)
+            {
+                return matrix;
+            }
+
+            var timesToRotate = degrees / 90;
+
+            for (int i = 1; i <= timesToRotate; i++)
+            {
+                for (int layer = 0; layer < size / 2; layer++)
+                {
+                    for (int step = layer; step < size - 1 - layer; step++)
+                    {
+                        var top = matrix[layer, step];
+
+                        matrix[layer, step] = matrix[size - 1 - step - layer, layer];
+
+                        matrix[size - 1 - step - layer, layer] = matrix[size - 1 - layer, size - 1 - step - layer];
+
+                        matrix[size - 1 - layer, size - 1 - step - layer] = matrix[step, size - 1 - layer];
+
+                        matrix[step, size - 1 - layer] = top;                      
+                    }
+                }
+            }
+
+            return matrix;
+        }
                
         private static void MakeRowAndColumnZero(int[,] matrix, int row, int col, int size)
         {
@@ -236,4 +267,5 @@ namespace StudyingProject3.Arrays
             }
         }        
     }
+
 }
