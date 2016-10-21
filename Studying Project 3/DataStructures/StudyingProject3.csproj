@@ -47,6 +47,7 @@
     <Compile Include="BinaryTree\Node.cs" />
     <Compile Include="BinaryTree\Traversal.cs" />
     <Compile Include="DynamicProgramming\DynamicProgramming.cs" />
+    <Compile Include="Graph\Edge.cs" />
     <Compile Include="Graph\Graph.cs" />
     <Compile Include="Graph\Node.cs" />
     <Compile Include="Graph\Traversal.cs" />

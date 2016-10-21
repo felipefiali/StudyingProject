@@ -20,5 +20,25 @@ namespace Tests
 
             Assert.IsTrue(Graph.IsTherePathBetweenNodes(graph, new Node(6)));
         }
+
+        [TestMethod]
+        public void Dijkstra()
+        {
+            var actual = Graph.Dijkstra(GraphSamples.DirectedWeightedGraph());
+
+            var expected = new Dictionary<int, int>()
+            {
+                { 1, 0 },
+                { 2, 7 },
+                { 3, 3 },
+                { 4, 9 },
+                { 5, 5 },
+            };
+
+            foreach (var item in actual)
+            {
+                Assert.AreEqual(expected[item.Key.Value], item.Value);
+            }
+        }
     }
 }

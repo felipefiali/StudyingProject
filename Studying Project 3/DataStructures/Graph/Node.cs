@@ -13,6 +13,8 @@ namespace StudyingProject3.Graph
             Value = value;
 
             Adjacents = new List<Node>();
+
+            Edges = new List<Edge>();
         }
 
         public Node()
@@ -23,6 +25,8 @@ namespace StudyingProject3.Graph
         public int Value { get; set; }
 
         public List<Node> Adjacents{ get; set; }
+
+        public List<Edge> Edges { get; set; }
 
         public bool Visited { get; set; }
 
