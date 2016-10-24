@@ -42,11 +42,11 @@ namespace StudyingProject3.Recursion
             return indicesInSolution.Count;
         }
 
-        public static HashSet<string> GetPermutations (string word)
+        public static HashSet<string> GetPermutations(string word)
         {
             if (word.Length == 2)
             {
-                return new HashSet<string>() { word, new string(word.ToCharArray().Reverse().ToArray())};
+                return new HashSet<string>() { word, new string(word.ToCharArray().Reverse().ToArray()) };
             }
 
             var newPerms = new HashSet<string>();
@@ -63,7 +63,7 @@ namespace StudyingProject3.Recursion
                     newPerms.Add(newPerm);
                 }
             }
-            
+
             return newPerms;
         }
 
@@ -115,6 +115,38 @@ namespace StudyingProject3.Recursion
             var subsets = new List<List<int>>();
 
             return GetAllSubsetsOfSet(array, 0, subsets);
+        }
+
+        public static bool CanReachSumWith3Nums(int[] array, int target)
+        {
+            return CanReachSumWith3Nums(array, target, 0, 0, 0);
+        }
+
+        private static bool CanReachSumWith3Nums(int[] array, int target, int currentSum, int index, int numsInSum)
+        {
+            if (array.Length == 0)
+            {
+                return false;
+            }
+
+            if (currentSum == target && numsInSum == 3)
+            {
+                return true;
+            }
+            else if (currentSum != target && numsInSum == 3)
+            {
+                return false;
+            }
+
+            if (index == array.Length)
+            {
+                return false;
+            }
+
+            return CanReachSumWith3Nums(array, target, array[index] + currentSum, index + 1, numsInSum + 1) ||
+                   CanReachSumWith3Nums(array, target, array[index] * 2, index + 1, numsInSum + 2) ||
+                   CanReachSumWith3Nums(array, target, currentSum, index + 1, numsInSum) ||                                               
+                   (target == array[index] * 3);
         }
 
         private static List<List<int>> GetAllSubsetsOfSet(int[] array, int curIndex, List<List<int>> subsets)

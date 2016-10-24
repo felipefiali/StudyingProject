@@ -101,5 +101,25 @@ namespace Tests
                 CollectionAssert.AreEqual(expected[i], actual[i]);
             }
         }
+
+        [TestMethod]
+        public void CanThreeNumbersSumToTarget()
+        {
+            var array = new int[] { 1, 2, 5, 6, 10, 5, -1 };
+            Assert.AreEqual(true, Recursion.CanReachSumWith3Nums(array, 9), "9");
+            
+            Assert.AreEqual(true, Recursion.CanReachSumWith3Nums(array, -3), "-3");
+
+            Assert.AreEqual(true, Recursion.CanReachSumWith3Nums(array, 5), "5");
+            
+            Assert.AreEqual(true, Recursion.CanReachSumWith3Nums(array, 21), "21");
+            
+            Assert.AreEqual(true, Recursion.CanReachSumWith3Nums(array, 30), "30");
+
+            Assert.AreEqual(false, Recursion.CanReachSumWith3Nums(array, 99), "99");
+
+            array = new int[] { 1, 2, 5, 6, 10, -1 };
+            Assert.AreEqual(true, Recursion.CanReachSumWith3Nums(array, 20), "20");
+        }
     }
 }
