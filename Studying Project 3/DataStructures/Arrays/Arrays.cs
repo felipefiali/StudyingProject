@@ -253,6 +253,53 @@ namespace StudyingProject3.Arrays
 
             return matrix;
         }
+
+        public static void QuickSort(int[] array)
+        {
+            QuickSort(array, 0, array.Length - 1);
+        }
+
+        private static void QuickSort(int[] array, int start, int end)
+        {
+            if (end > start)
+            {
+                var pivot = PartitionQuickSort(array, start, end);
+
+                QuickSort(array, start, pivot - 1);
+                QuickSort(array, pivot + 1, end);
+            }         
+        }
+
+        private static int PartitionQuickSort(int[] array, int start, int end)
+        {
+            var random = new Random().Next(start, end);
+
+            Swap(array, random, end);
+
+            var i = start;
+
+            for (int j = start; j < end; j++)
+            {
+                if (array[j] <= array[end])
+                {
+                    Swap(array, j, i);
+                    i++;
+                }
+            }
+
+            Swap(array, i, end);
+
+            return i;
+        }
+
+        private static void Swap(int[] array, int from, int to)
+        {
+            var aux = array[to];
+
+            array[to] = array[from];
+
+            array[from] = aux;
+        }
                
         private static void MakeRowAndColumnZero(int[,] matrix, int row, int col, int size)
         {

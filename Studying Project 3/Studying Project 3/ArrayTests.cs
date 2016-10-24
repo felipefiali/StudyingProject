@@ -110,5 +110,17 @@ namespace Tests
 
             CollectionAssert.AreEquivalent(expected, Arrays.RotateMatrix(matrix, 4, 90));
         }
+
+        [TestMethod]
+        public void QuickSort()
+        {
+            var array = new int[] { 6, 5, 1, 3, 8, 4, 7, 9, 2 };
+
+            var expected = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+            Arrays.QuickSort(array);
+
+            CollectionAssert.AreEqual(expected, array);
+        }
     }
 }
