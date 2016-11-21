@@ -122,5 +122,31 @@ namespace Tests
 
             CollectionAssert.AreEqual(expected, array);
         }
+
+        [TestMethod]
+        public void MaxAdjacentDistance()
+        {
+            var array = new int[] { 0, 3, 3, 12, 5, 3, 7, 1 };
+
+            Assert.AreEqual(5, Arrays.GetMaxDistanceOfAdjacentPoints(array), "Distance should be 5.");
+
+            array = new int[] { 1, 1, 1, 1, 1, 1 };
+
+            Assert.AreEqual(-2, Arrays.GetMaxDistanceOfAdjacentPoints(array), "Should return -2, no adjacent points found.");
+
+            array = new int[] { 1 };
+
+            Assert.AreEqual(-2, Arrays.GetMaxDistanceOfAdjacentPoints(array), "Should return -2, array has only one element.");
+
+            array = new int[] { };
+
+            Assert.AreEqual(-2, Arrays.GetMaxDistanceOfAdjacentPoints(array), "Should return -2, empty array.");
+
+            Assert.AreEqual(-2, Arrays.GetMaxDistanceOfAdjacentPoints(null), "Should return -2, the array is null.");
+
+            array = new int[] { -15, -12, 3, 5, 7 };
+
+            Assert.AreEqual(15, Arrays.GetMaxDistanceOfAdjacentPoints(array), "Distance should be 15. (3 - (-12))");
+        }
     }
 }

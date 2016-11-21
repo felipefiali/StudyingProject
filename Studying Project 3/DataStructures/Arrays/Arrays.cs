@@ -259,6 +259,32 @@ namespace StudyingProject3.Arrays
             QuickSort(array, 0, array.Length - 1);
         }
 
+        public static int GetMaxDistanceOfAdjacentPoints(int[] array)
+        {
+            if (array == null || array.Length < 2)
+            {
+                return -2;
+            }
+
+            QuickSort(array);
+
+            int currentMax = 0;
+
+            for (int i = 0; i < array.Length - 1; i++)
+            {
+                currentMax = Math.Max(currentMax, Math.Abs(array[i + 1] - array[i]));
+            }
+
+            if (currentMax == 0)
+            {
+                return -2;
+            }
+            else
+            {
+                return currentMax;
+            }
+        }
+
         private static void QuickSort(int[] array, int start, int end)
         {
             if (end > start)
